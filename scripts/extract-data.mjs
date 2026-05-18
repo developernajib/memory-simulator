@@ -4,7 +4,7 @@
 // Kept in-repo to document exactly how the data modules were produced.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
-const SRC = '../memory_simulator.html';
+const SRC = '../../memory_simulator.html';
 const html = readFileSync(new URL(SRC, import.meta.url), 'utf8');
 const lines = html.split('\n');
 
@@ -34,21 +34,25 @@ writeFileSync(
 );
 
 // ── register/region metadata constants ──
+// (data and render functions are interleaved in the source, so we slice the
+//  precise constant sub-ranges and re-export them.)
 const meta = [
-  slice(4731, 4779), // TAG_TIPS, ADDR_TIPS, VAL_TIPS
-  slice(4781, 4823), // REGION_TIPS, REGION_EXPLAINERS
-  slice(4825, 4862), // GPR_META, FLAG_META, SEG_META
-].join('\n\n');
+  slice(4731, 4756), // TAG_TIPS, ADDR_TIPS, VAL_TIPS
+  slice(4781, 4794), // REGION_TIPS, REGION_EXPLAINERS
+  slice(4825, 4861), // GPR_META, FLAG_META, SEG_META
+]
+  .join('\n\n')
+  .replace(/(^|\n)const /g, '$1export const ')
+  .replace('export const GPR_META = [', 'export const GPR_META: GprMeta[] = [')
+  .replace('export const FLAG_META = [', 'export const FLAG_META: FlagMeta[] = [')
+  .replace('export const SEG_META = [', 'export const SEG_META: SegMeta[] = [');
 writeFileSync(
   new URL('../src/data/registerMeta.ts', import.meta.url),
-  `// Verbatim register/region metadata, extracted unchanged from the original.\n/* eslint-disable */\nexport ${meta.replace(/\n        const /g, '\nexport const ').replace(/^const /, '')}\n`,
+  `// Verbatim register/region metadata, extracted unchanged from the original.\n// Typed via the *Meta interfaces in ../types.\n/* eslint-disable */\nimport type { GprMeta, FlagMeta, SegMeta } from '../types';\n${meta}\n`,
 );
 
-// ── register-derivation logic (pure, no DOM) ──
-const logic = slice(4863, 5014); // hex helpers + deriveRegisters + countRegChanges
-writeFileSync(
-  new URL('../src/lib/registers.ts', import.meta.url),
-  `// Verbatim register-derivation logic, extracted unchanged from the original.\n// Pure functions only — no DOM access.\n/* eslint-disable */\nimport { GPR_META, FLAG_META, SEG_META } from '../data/registerMeta';\nimport { S } from '../data/steps';\n${logic}\n\nexport { deriveRegisters, countRegChanges, hex64, low32, low16, low8 };\n`,
-);
+// Note: the register-derivation logic (deriveRegisters/countRegChanges and the
+// hex helpers) is hand-ported with full TypeScript types in src/lib/registers.ts
+// rather than extracted raw, since the original is untyped JS.
 
-console.log('extracted: goSource.ts, steps.ts, registerMeta.ts, lib/registers.ts');
+console.log('extracted: goSource.ts, steps.ts, registerMeta.ts');
