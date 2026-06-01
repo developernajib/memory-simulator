@@ -24,7 +24,7 @@ const TABS: { tab: MemTab; label: string; tip: string }[] = [
   { tab: 'vmap', label: 'Virtual Map', tip: 'Linux virtual address space layout: null, text, data, heap, stacks, kernel' },
 ];
 
-export function MemoryPanel() {
+export function MemoryPanel({ className = '' }: { className?: string }) {
   const { cur, total, memTab, setMemTab } = useSim();
   const [copied, setCopied] = useState(false);
 
@@ -39,7 +39,7 @@ export function MemoryPanel() {
   };
 
   return (
-    <div className="mem-panel">
+    <div className={`mem-panel ${className}`.trim()}>
       <div className="mem-tabs">
         {TABS.map((t) => (
           <div

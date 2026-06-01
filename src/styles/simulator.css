@@ -1861,6 +1861,11 @@ body {
         overflow: hidden
     }
 
+    /* React drives mobile panel switching: hide the inactive panels. */
+    .mobile-hidden {
+        display: none !important
+    }
+
     .mobile-nav {
         display: flex
     }

@@ -4,11 +4,11 @@ import { CodeView } from './CodeView';
 import { DiffBanner } from './DiffBanner';
 import { StepView } from './StepView';
 
-export function CenterPanel() {
+export function CenterPanel({ className = '' }: { className?: string }) {
   const { centerTab, setCenterTab } = useSim();
 
   return (
-    <div className="center">
+    <div className={`center ${className}`.trim()}>
       <div className="ctabs">
         <div
           className={`ctab tip tip-below${centerTab === 'step' ? ' on' : ''}`}

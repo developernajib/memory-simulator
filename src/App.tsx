@@ -1,122 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// Application root: provides simulator state, installs the global tooltip and
+// pointer-highlight engines, and composes the three-column layout plus the mobile
+// chrome and help modal.
+import { useEffect, useState } from 'react';
+import { CenterPanel } from './components/CenterPanel';
+import { HelpModal } from './components/HelpModal';
+import { MemoryPanel } from './components/MemoryPanel';
+import { MobileNav } from './components/MobileNav';
+import { MobileStepBar } from './components/MobileStepBar';
+import { StepsSidebar } from './components/StepsSidebar';
+import { TopBar } from './components/TopBar';
+import { SimulatorContext } from './hooks/SimulatorContext';
+import { usePointerHighlight } from './hooks/usePointerHighlight';
+import { useResponsive, type MobilePanel } from './hooks/useResponsive';
+import { useSimulator } from './hooks/useSimulator';
+import { useTooltip } from './hooks/useTooltip';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const sim = useSimulator();
+  const { isMobile, panel, setPanel } = useResponsive();
+  const [helpOpen, setHelpOpen] = useState(false);
+
+  useTooltip();
+  usePointerHighlight();
+
+  // The "?" keyboard shortcut dispatches sim:help; open the modal on it.
+  useEffect(() => {
+    const onHelp = () => setHelpOpen(true);
+    window.addEventListener('sim:help', onHelp);
+    return () => window.removeEventListener('sim:help', onHelp);
+  }, []);
+
+  // On mobile, only the selected panel stays visible (panels remain direct grid
+  // children so the desktop layout is untouched).
+  const hidden = (p: MobilePanel) => (isMobile && panel !== p ? 'mobile-hidden' : '');
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <SimulatorContext.Provider value={sim}>
+      <div className="app">
+        <TopBar />
+        <div className="body">
+          <StepsSidebar onOpenHelp={() => setHelpOpen(true)} className={hidden('steps')} />
+          <CenterPanel className={hidden('center')} />
+          <MemoryPanel className={hidden('memory')} />
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        {isMobile && <MobileStepBar />}
+        {isMobile && <MobileNav panel={panel} setPanel={setPanel} />}
+      </div>
+      <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
+    </SimulatorContext.Provider>
+  );
 }
-
-export default App

@@ -22,9 +22,10 @@ const SPEEDS = [
 
 interface StepsSidebarProps {
   onOpenHelp: () => void;
+  className?: string;
 }
 
-export function StepsSidebar({ onOpenHelp }: StepsSidebarProps) {
+export function StepsSidebar({ onOpenHelp, className = '' }: StepsSidebarProps) {
   const { cur, total, go, nav, autoPlay, toggleAutoPlay, speed, setSpeed } = useSim();
   const [query, setQuery] = useState('');
 
@@ -76,7 +77,7 @@ export function StepsSidebar({ onOpenHelp }: StepsSidebarProps) {
   });
 
   return (
-    <div className="steps-panel">
+    <div className={`steps-panel ${className}`.trim()}>
       <div className="sp-hdr" style={{ display: 'flex', alignItems: 'center' }}>
         <div>
           <div className="sp-title">Execution Steps</div>
