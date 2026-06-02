@@ -1,6 +1,5 @@
 // Verbatim 31-step execution dataset, extracted unchanged from the original
 // memory_simulator.html. Typed via the Step interface in ../types.
-/* eslint-disable */
 import type { Step } from '../types';
 const S_RAW = [
     {

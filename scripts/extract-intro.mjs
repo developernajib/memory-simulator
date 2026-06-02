@@ -20,7 +20,6 @@ const esc = (s) => '`' + s.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/
 const out =
   '// Verbatim beginner-intro HTML bodies and the register footer note,\n' +
   '// extracted unchanged from the original memory_simulator.html.\n' +
-  '/* eslint-disable */\n' +
   'export const REGS_INTRO_HTML = ' + esc(regsIntro) + ';\n\n' +
   'export const ALL_INTRO_HTML = ' + esc(allIntro) + ';\n\n' +
   'export const REG_FOOTER_HTML = ' + esc(regNote) + ';\n';

@@ -1,6 +1,5 @@
 // Verbatim register/region metadata, extracted unchanged from the original.
 // Typed via the *Meta interfaces in ../types.
-/* eslint-disable */
 import type { GprMeta, FlagMeta, SegMeta } from '../types';
 export const TAG_TIPS = {
     'new': 'Newly allocated in this step — memory did not exist before',

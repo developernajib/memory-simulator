@@ -1,6 +1,5 @@
 // Verbatim beginner-intro HTML bodies and the register footer note,
 // extracted unchanged from the original memory_simulator.html.
-/* eslint-disable */
 export const REGS_INTRO_HTML = `Registers are a tiny set of storage slots <b>inside the CPU</b> — only a few dozen, each 64 bits wide,
 but accessed in well under a nanosecond. The CPU can only compute on values that are in registers, so a
 program is really just a loop of: <b>load</b> from memory → <b>compute</b> → <b>store</b> back.

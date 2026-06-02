@@ -23,14 +23,14 @@ mkdirSync(new URL('../src/lib', import.meta.url), { recursive: true });
 const goSource = slice(2474, 2707); // `const GO_SOURCE = \`...\`;`
 writeFileSync(
   new URL('../src/data/goSource.ts', import.meta.url),
-  `// Verbatim Go program rendered in the "task.go" tab.\n// Extracted unchanged from the original memory_simulator.html.\n/* eslint-disable */\nexport ${goSource}\n`,
+  `// Verbatim Go program rendered in the "task.go" tab.\n// Extracted unchanged from the original memory_simulator.html.\nexport ${goSource}\n`,
 );
 
 // ── S: the 31-step execution data array ──
 const stepsArr = slice(2713, 4450).replace(/^const S = \[/, 'const S_RAW = ['); // `const S = [ ... ];`
 writeFileSync(
   new URL('../src/data/steps.ts', import.meta.url),
-  `// Verbatim 31-step execution dataset, extracted unchanged from the original\n// memory_simulator.html. Typed via the Step interface in ../types.\n/* eslint-disable */\nimport type { Step } from '../types';\n${stepsArr}\n\nexport const S: Step[] = S_RAW as unknown as Step[];\n`,
+  `// Verbatim 31-step execution dataset, extracted unchanged from the original\n// memory_simulator.html. Typed via the Step interface in ../types.\nimport type { Step } from '../types';\n${stepsArr}\n\nexport const S: Step[] = S_RAW as unknown as Step[];\n`,
 );
 
 // ── register/region metadata constants ──
@@ -48,7 +48,7 @@ const meta = [
   .replace('export const SEG_META = [', 'export const SEG_META: SegMeta[] = [');
 writeFileSync(
   new URL('../src/data/registerMeta.ts', import.meta.url),
-  `// Verbatim register/region metadata, extracted unchanged from the original.\n// Typed via the *Meta interfaces in ../types.\n/* eslint-disable */\nimport type { GprMeta, FlagMeta, SegMeta } from '../types';\n${meta}\n`,
+  `// Verbatim register/region metadata, extracted unchanged from the original.\n// Typed via the *Meta interfaces in ../types.\nimport type { GprMeta, FlagMeta, SegMeta } from '../types';\n${meta}\n`,
 );
 
 // Note: the register-derivation logic (deriveRegisters/countRegChanges and the

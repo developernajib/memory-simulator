@@ -1,6 +1,5 @@
 // Verbatim Go program rendered in the "task.go" tab.
 // Extracted unchanged from the original memory_simulator.html.
-/* eslint-disable */
 export const GO_SOURCE = `package main
 
 import (

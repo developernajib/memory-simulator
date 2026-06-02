@@ -6,7 +6,7 @@
 // and two-way sync with the URL hash (permalink to a step). Components consume this
 // via the SimulatorContext provider so no prop-drilling is required.
 // ──────────────────────────────────────────────────────────────────────────────
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { S } from '../data/steps';
 import type { CenterTab, IntroKey, MemTab, RegionKey } from '../types';
 
@@ -82,8 +82,6 @@ export function useSimulator(): SimulatorState {
   const setSpeed = useCallback((ms: number) => setSpeedState(ms), []);
 
   // auto-play timer: advance until the last step, then stop
-  const autoRef = useRef(autoPlay);
-  autoRef.current = autoPlay;
   useEffect(() => {
     if (!autoPlay) return;
     const id = window.setInterval(() => {
