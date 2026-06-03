@@ -16,37 +16,40 @@ import { useSimulator } from './hooks/useSimulator';
 import { useTooltip } from './hooks/useTooltip';
 
 export default function App() {
-  const sim = useSimulator();
-  const { isMobile, panel, setPanel } = useResponsive();
-  const [helpOpen, setHelpOpen] = useState(false);
+    const sim = useSimulator();
+    const { isMobile, panel, setPanel } = useResponsive();
+    const [helpOpen, setHelpOpen] = useState(false);
 
-  useTooltip();
-  usePointerHighlight();
+    useTooltip();
+    usePointerHighlight();
 
-  // The "?" keyboard shortcut dispatches sim:help; open the modal on it.
-  useEffect(() => {
-    const onHelp = () => setHelpOpen(true);
-    window.addEventListener('sim:help', onHelp);
-    return () => window.removeEventListener('sim:help', onHelp);
-  }, []);
+    // The "?" keyboard shortcut dispatches sim:help; open the modal on it.
+    useEffect(() => {
+        const onHelp = () => setHelpOpen(true);
+        window.addEventListener('sim:help', onHelp);
+        return () => window.removeEventListener('sim:help', onHelp);
+    }, []);
 
-  // On mobile, only the selected panel stays visible (panels remain direct grid
-  // children so the desktop layout is untouched).
-  const hidden = (p: MobilePanel) => (isMobile && panel !== p ? 'mobile-hidden' : '');
+    // On mobile, only the selected panel stays visible (panels remain direct grid
+    // children so the desktop layout is untouched).
+    const hidden = (p: MobilePanel) => (isMobile && panel !== p ? 'mobile-hidden' : '');
 
-  return (
-    <SimulatorContext.Provider value={sim}>
-      <div className="app">
-        <TopBar />
-        <div className="body">
-          <StepsSidebar onOpenHelp={() => setHelpOpen(true)} className={hidden('steps')} />
-          <CenterPanel className={hidden('center')} />
-          <MemoryPanel className={hidden('memory')} />
-        </div>
-        {isMobile && <MobileStepBar />}
-        {isMobile && <MobileNav panel={panel} setPanel={setPanel} />}
-      </div>
-      <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
-    </SimulatorContext.Provider>
-  );
+    return (
+        <SimulatorContext.Provider value={sim}>
+            <div className="app">
+                <TopBar />
+                <div className="body">
+                    <StepsSidebar
+                        onOpenHelp={() => setHelpOpen(true)}
+                        className={hidden('steps')}
+                    />
+                    <CenterPanel className={hidden('center')} />
+                    <MemoryPanel className={hidden('memory')} />
+                </div>
+                {isMobile && <MobileStepBar />}
+                {isMobile && <MobileNav panel={panel} setPanel={setPanel} />}
+            </div>
+            <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
+        </SimulatorContext.Provider>
+    );
 }

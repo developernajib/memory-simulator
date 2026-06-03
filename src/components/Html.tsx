@@ -6,15 +6,20 @@
 import type { JSX } from 'react';
 
 interface HtmlProps {
-  html: string;
-  as?: keyof JSX.IntrinsicElements;
-  className?: string;
-  style?: React.CSSProperties;
-  id?: string;
+    html: string;
+    as?: keyof JSX.IntrinsicElements;
+    className?: string;
+    style?: React.CSSProperties;
+    id?: string;
 }
 
 export function Html({ html, as: Tag = 'div', className, style, id }: HtmlProps) {
-  return (
-    <Tag id={id} className={className} style={style} dangerouslySetInnerHTML={{ __html: html }} />
-  );
+    return (
+        <Tag
+            id={id}
+            className={className}
+            style={style}
+            dangerouslySetInnerHTML={{ __html: html }}
+        />
+    );
 }
