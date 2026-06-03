@@ -61,7 +61,9 @@ export function MemoryTimeline() {
         onMouseMove={(e) => {
           const idx = indexFromEvent(e);
           const step = S[idx];
-          setHoverTip(`Step ${idx + 1}: ${step.name} · heap ${step.heapB}B · stack ${step.stackB}B`);
+          setHoverTip(
+            `Step ${idx + 1}: ${step.name} · heap ${step.heapB}B · stack ${step.stackB}B`,
+          );
         }}
         onMouseLeave={() => setHoverTip(undefined)}
       >
@@ -77,16 +79,61 @@ export function MemoryTimeline() {
         </defs>
         <polygon points={heapArea} fill="url(#gH)" />
         <polygon points={stackArea} fill="url(#gS)" />
-        <polyline points={heapLine} fill="none" stroke="#f87171" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
-        <polyline points={stackLine} fill="none" stroke="#fbbf24" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" />
+        <polyline
+          points={heapLine}
+          fill="none"
+          stroke="#f87171"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+        <polyline
+          points={stackLine}
+          fill="none"
+          stroke="#fbbf24"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
         {heapVals.map((v, i) => (
-          <circle key={`h${i}`} cx={px(i)} cy={pyH(v)} r={i === cur ? 3.5 : 2} fill="#f87171" opacity={i === cur ? 1 : 0.5} />
+          <circle
+            key={`h${i}`}
+            cx={px(i)}
+            cy={pyH(v)}
+            r={i === cur ? 3.5 : 2}
+            fill="#f87171"
+            opacity={i === cur ? 1 : 0.5}
+          />
         ))}
         {stackVals.map((v, i) => (
-          <circle key={`s${i}`} cx={px(i)} cy={pyS(v)} r={i === cur ? 3.5 : 2} fill="#fbbf24" opacity={i === cur ? 1 : 0.5} />
+          <circle
+            key={`s${i}`}
+            cx={px(i)}
+            cy={pyS(v)}
+            r={i === cur ? 3.5 : 2}
+            fill="#fbbf24"
+            opacity={i === cur ? 1 : 0.5}
+          />
         ))}
-        <line x1={cx} y1="0" x2={cx} y2={H} stroke="#4ade80" strokeWidth="1" strokeDasharray="3,2" opacity=".6" />
-        <circle cx={cx} cy={pyH(heapVals[cur])} r="6" fill="none" stroke="#f87171" strokeWidth="1" opacity=".5" />
+        <line
+          x1={cx}
+          y1="0"
+          x2={cx}
+          y2={H}
+          stroke="#4ade80"
+          strokeWidth="1"
+          strokeDasharray="3,2"
+          opacity=".6"
+        />
+        <circle
+          cx={cx}
+          cy={pyH(heapVals[cur])}
+          r="6"
+          fill="none"
+          stroke="#f87171"
+          strokeWidth="1"
+          opacity=".5"
+        />
       </svg>
     </div>
   );

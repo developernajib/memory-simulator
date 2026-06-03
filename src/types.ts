@@ -7,15 +7,7 @@
 // ──────────────────────────────────────────────────────────────────────────────
 
 /** Visual classification of a memory cell's value (drives its colour). */
-export type ValueClass =
-  | 'ptr'
-  | 'str'
-  | 'bt'
-  | 'bf'
-  | 'fn'
-  | 'nil'
-  | 'stale'
-  | '';
+export type ValueClass = 'ptr' | 'str' | 'bt' | 'bf' | 'fn' | 'nil' | 'stale' | '';
 
 /** Lifecycle tag highlighting how a row changed this step. */
 export type RowTag = 'new' | 'upd' | 'free' | '';
@@ -53,13 +45,7 @@ export interface Goroutine {
 }
 
 /** Memory regions a step touches (drives the sidebar tag chips). */
-export type RegionTag =
-  | 'stack'
-  | 'heap'
-  | 'goroutine'
-  | 'gc'
-  | 'mutex'
-  | 'interface';
+export type RegionTag = 'stack' | 'heap' | 'goroutine' | 'gc' | 'mutex' | 'interface';
 
 /** One step of the simulated program execution. */
 export interface Step {

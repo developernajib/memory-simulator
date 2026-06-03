@@ -14,16 +14,30 @@ export function MobileNav({ panel, setPanel }: MobileNavProps) {
       <button className="mn-btn mn-nav" id="mn-prev" disabled={cur === 0} onClick={() => nav(-1)}>
         <span className="mn-nav-icon">←</span>
       </button>
-      <button className={`mn-btn${panel === 'steps' ? ' active' : ''}`} onClick={() => setPanel('steps')}>
+      <button
+        className={`mn-btn${panel === 'steps' ? ' active' : ''}`}
+        onClick={() => setPanel('steps')}
+      >
         <span className="mn-icon">☰</span>Steps
       </button>
-      <button className={`mn-btn${panel === 'center' ? ' active' : ''}`} onClick={() => setPanel('center')}>
+      <button
+        className={`mn-btn${panel === 'center' ? ' active' : ''}`}
+        onClick={() => setPanel('center')}
+      >
         <span className="mn-icon">◎</span>Code
       </button>
-      <button className={`mn-btn${panel === 'memory' ? ' active' : ''}`} onClick={() => setPanel('memory')}>
+      <button
+        className={`mn-btn${panel === 'memory' ? ' active' : ''}`}
+        onClick={() => setPanel('memory')}
+      >
         <span className="mn-icon">⊟</span>Memory
       </button>
-      <button className="mn-btn mn-nav" id="mn-next" disabled={cur === total - 1} onClick={() => nav(1)}>
+      <button
+        className="mn-btn mn-nav"
+        id="mn-next"
+        disabled={cur === total - 1}
+        onClick={() => nav(1)}
+      >
         <span className="mn-nav-icon">→</span>
       </button>
     </div>

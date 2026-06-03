@@ -19,9 +19,21 @@ const TABS: { tab: MemTab; label: string; tip: string }[] = [
     label: 'CPU Registers',
     tip: 'x86-64 CPU register file: PC/RIP, instruction register, decoder, RSP, RBP, RAX–R15, RFLAGS, segment & control registers, SIMD',
   },
-  { tab: 'goroutines', label: 'Goroutines', tip: 'Active goroutines (G structs): state, PC, stack range' },
-  { tab: 'chart', label: 'Heap Map', tip: 'Visual mspan layout: shows allocated vs free spans in heap' },
-  { tab: 'vmap', label: 'Virtual Map', tip: 'Linux virtual address space layout: null, text, data, heap, stacks, kernel' },
+  {
+    tab: 'goroutines',
+    label: 'Goroutines',
+    tip: 'Active goroutines (G structs): state, PC, stack range',
+  },
+  {
+    tab: 'chart',
+    label: 'Heap Map',
+    tip: 'Visual mspan layout: shows allocated vs free spans in heap',
+  },
+  {
+    tab: 'vmap',
+    label: 'Virtual Map',
+    tip: 'Linux virtual address space layout: null, text, data, heap, stacks, kernel',
+  },
 ];
 
 export function MemoryPanel({ className = '' }: { className?: string }) {

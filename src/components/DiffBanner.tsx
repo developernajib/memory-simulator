@@ -9,13 +9,28 @@ export function DiffBanner() {
   const newCnt = allRows.filter((r) => r.tag === 'new').length;
   const updCnt = allRows.filter((r) => r.tag === 'upd').length;
   const freeCnt = allRows.filter((r) => r.tag === 'free').length;
-  const heapDelta = (s.heapB ?? 0) - (cur > 0 ? S[cur - 1].heapB ?? 0 : 0);
-  const stackDelta = (s.stackB ?? 0) - (cur > 0 ? S[cur - 1].stackB ?? 0 : 0);
+  const heapDelta = (s.heapB ?? 0) - (cur > 0 ? (S[cur - 1].heapB ?? 0) : 0);
+  const stackDelta = (s.stackB ?? 0) - (cur > 0 ? (S[cur - 1].stackB ?? 0) : 0);
 
   const pills: React.ReactNode[] = [];
-  if (newCnt > 0) pills.push(<span className="diff-pill alloc" key="a">+{newCnt} alloc</span>);
-  if (updCnt > 0) pills.push(<span className="diff-pill upd" key="u">~ {updCnt} updated</span>);
-  if (freeCnt > 0) pills.push(<span className="diff-pill freed" key="f">-{freeCnt} freed</span>);
+  if (newCnt > 0)
+    pills.push(
+      <span className="diff-pill alloc" key="a">
+        +{newCnt} alloc
+      </span>,
+    );
+  if (updCnt > 0)
+    pills.push(
+      <span className="diff-pill upd" key="u">
+        ~ {updCnt} updated
+      </span>,
+    );
+  if (freeCnt > 0)
+    pills.push(
+      <span className="diff-pill freed" key="f">
+        -{freeCnt} freed
+      </span>,
+    );
   if (heapDelta !== 0)
     pills.push(
       <span className="diff-pill heap" key="h">

@@ -65,12 +65,13 @@ export function HelpModal({ open, onClose }: HelpModalProps) {
           }}
         >
           <b style={{ color: 'var(--blue)' }}>CPU Registers panel</b> — open the{' '}
-          <b style={{ color: 'var(--t2)' }}>CPU Registers</b> tab (or scroll the All Regions view) to watch the
-          x86-64 register file per step: <b style={{ color: 'var(--t2)' }}>RIP</b> (program counter), instruction
-          register, decoder, <b style={{ color: 'var(--t2)' }}>RSP/RBP</b>, all 16 general-purpose registers
-          (64/32/16/8-bit), RFLAGS, segment, SIMD and control registers. Yellow rows changed this step;{' '}
-          <span style={{ color: 'var(--green)' }}>◀ write</span> marks the register the current instruction writes
-          back to. Hover any value for the full width.
+          <b style={{ color: 'var(--t2)' }}>CPU Registers</b> tab (or scroll the All Regions view)
+          to watch the x86-64 register file per step: <b style={{ color: 'var(--t2)' }}>RIP</b>{' '}
+          (program counter), instruction register, decoder,{' '}
+          <b style={{ color: 'var(--t2)' }}>RSP/RBP</b>, all 16 general-purpose registers
+          (64/32/16/8-bit), RFLAGS, segment, SIMD and control registers. Yellow rows changed this
+          step; <span style={{ color: 'var(--green)' }}>◀ write</span> marks the register the
+          current instruction writes back to. Hover any value for the full width.
         </div>
       </div>
     </div>

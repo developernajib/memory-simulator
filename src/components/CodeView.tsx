@@ -28,7 +28,8 @@ export function CodeView() {
     const first = s.lines?.[0];
     if (!first || !containerRef.current) return;
     const target = containerRef.current.querySelector<HTMLElement>(`[data-ln="${first}"]`);
-    if (target) requestAnimationFrame(() => target.scrollIntoView({ block: 'center', behavior: 'smooth' }));
+    if (target)
+      requestAnimationFrame(() => target.scrollIntoView({ block: 'center', behavior: 'smooth' }));
   }, [cur, s.lines]);
 
   const stepLabel = highlighted.size > 0 ? `step ${cur + 1} — ${s.name}` : '';
@@ -77,7 +78,11 @@ export function CodeView() {
         {lines.map((html, i) => {
           const ln = i + 1;
           return (
-            <div className={`cf-line${highlighted.has(ln) ? ' highlighted' : ''}`} data-ln={ln} key={ln}>
+            <div
+              className={`cf-line${highlighted.has(ln) ? ' highlighted' : ''}`}
+              data-ln={ln}
+              key={ln}
+            >
               <span className="cf-ln">{ln}</span>
               <span className="cf-code" dangerouslySetInnerHTML={{ __html: html }} />
             </div>

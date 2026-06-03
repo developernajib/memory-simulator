@@ -15,11 +15,6 @@ interface HtmlProps {
 
 export function Html({ html, as: Tag = 'div', className, style, id }: HtmlProps) {
   return (
-    <Tag
-      id={id}
-      className={className}
-      style={style}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <Tag id={id} className={className} style={style} dangerouslySetInnerHTML={{ __html: html }} />
   );
 }

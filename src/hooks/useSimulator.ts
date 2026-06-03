@@ -54,16 +54,16 @@ export function useSimulator(): SimulatorState {
   const [autoPlay, setAutoPlay] = useState(false);
   const [speed, setSpeedState] = useState(2800);
 
-  const go = useCallback(
-    (index: number) => {
-      const next = Math.max(0, Math.min(S.length - 1, index));
-      setCur(next);
-      window.history.replaceState(null, '', `#${next + 1}`);
-    },
+  const go = useCallback((index: number) => {
+    const next = Math.max(0, Math.min(S.length - 1, index));
+    setCur(next);
+    window.history.replaceState(null, '', `#${next + 1}`);
+  }, []);
+
+  const nav = useCallback(
+    (delta: number) => setCur((c) => Math.max(0, Math.min(S.length - 1, c + delta))),
     [],
   );
-
-  const nav = useCallback((delta: number) => setCur((c) => Math.max(0, Math.min(S.length - 1, c + delta))), []);
 
   // keep the hash in sync when cur changes via nav()/auto-play
   useEffect(() => {
@@ -147,6 +147,21 @@ export function useSimulator(): SimulatorState {
       toggleAutoPlay,
       setSpeed,
     }),
-    [cur, total, centerTab, memTab, regionOpen, introOpen, autoPlay, speed, nav, go, toggleRegion, toggleIntro, toggleAutoPlay, setSpeed],
+    [
+      cur,
+      total,
+      centerTab,
+      memTab,
+      regionOpen,
+      introOpen,
+      autoPlay,
+      speed,
+      nav,
+      go,
+      toggleRegion,
+      toggleIntro,
+      toggleAutoPlay,
+      setSpeed,
+    ],
   );
 }

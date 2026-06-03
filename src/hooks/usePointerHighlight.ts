@@ -11,7 +11,9 @@ import { useEffect } from 'react';
 export function usePointerHighlight(): void {
   useEffect(() => {
     const clear = () =>
-      document.querySelectorAll('.mrow.ptr-target').forEach((el) => el.classList.remove('ptr-target'));
+      document
+        .querySelectorAll('.mrow.ptr-target')
+        .forEach((el) => el.classList.remove('ptr-target'));
 
     const onOver = (e: MouseEvent) => {
       const cell = (e.target as Element)?.closest<HTMLElement>('[data-ptr]');

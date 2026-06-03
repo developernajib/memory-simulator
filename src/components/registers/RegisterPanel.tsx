@@ -56,8 +56,15 @@ export function RegisterPanel({ forceOpen = false }: RegisterPanelProps) {
         <span style={{ flex: 1 }} />
         <span className="mr-addr">PC {R.pc}</span>
       </div>
-      <div className={`mr-body${open ? '' : ' collapsed'}`} style={{ maxHeight: open ? '9999px' : '0' }}>
-        <MemoryIntro introKey="regs" title="What are CPU registers? (read me first)" bodyHtml={REGS_INTRO_HTML} />
+      <div
+        className={`mr-body${open ? '' : ' collapsed'}`}
+        style={{ maxHeight: open ? '9999px' : '0' }}
+      >
+        <MemoryIntro
+          introKey="regs"
+          title="What are CPU registers? (read me first)"
+          bodyHtml={REGS_INTRO_HTML}
+        />
         <ControlFlowStrip R={R} prev={prev} step={s} />
 
         <SubLabel

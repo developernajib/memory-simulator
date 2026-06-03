@@ -45,7 +45,9 @@ export function StepsSidebar({ onOpenHelp, className = '' }: StepsSidebarProps) 
     const visible = term.length === 0 || matches[i];
     if (s.group !== lastGroup) {
       lastGroup = s.group;
-      const groupHasVisible = S.some((g, j) => g.group === s.group && (term.length === 0 || matches[j]));
+      const groupHasVisible = S.some(
+        (g, j) => g.group === s.group && (term.length === 0 || matches[j]),
+      );
       rows.push(
         <div className="grp-label" key={`grp-${s.group}-${i}`} hidden={!groupHasVisible}>
           {s.group}
@@ -66,7 +68,11 @@ export function StepsSidebar({ onOpenHelp, className = '' }: StepsSidebarProps) 
           <div className="si-fn">{s.fn}</div>
           <div className="si-tags">
             {(s.tags ?? []).map((t: RegionTag) => (
-              <span className={`si-tag t-${t} tip tip-below`} data-tip={SI_TAG_TIPS[t] ?? t} key={t}>
+              <span
+                className={`si-tag t-${t} tip tip-below`}
+                data-tip={SI_TAG_TIPS[t] ?? t}
+                key={t}
+              >
                 {t}
               </span>
             ))}

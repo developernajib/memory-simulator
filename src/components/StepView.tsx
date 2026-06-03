@@ -54,7 +54,9 @@ export function StepView() {
                 {freeCnt} freed
               </span>
             )}
-            <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--blue)' }}>{s.fn}</span>
+            <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--blue)' }}>
+              {s.fn}
+            </span>
           </span>
         </div>
         <div className="sv-body">

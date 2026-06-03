@@ -5,7 +5,9 @@ import { useSim } from '../../hooks/SimulatorContext';
 export function GoroutinesView() {
   const { cur } = useSim();
   const s = S[cur];
-  const gs = s.goroutines ?? [{ id: 'G1', state: 'run' as const, fn: 'main()', stack: '0xC000010000' }];
+  const gs = s.goroutines ?? [
+    { id: 'G1', state: 'run' as const, fn: 'main()', stack: '0xC000010000' },
+  ];
   const runningId = gs.find((g) => g.state === 'run')?.id?.replace('G', '') ?? '1';
 
   return (
@@ -21,7 +23,8 @@ export function GoroutinesView() {
             : g.state === 'wait'
               ? 'waiting — parked (channel, mutex, sleep). Not on run queue.'
               : 'GC worker — background mark/sweep goroutine spawned by runtime';
-        const stateLabel = g.state === 'run' ? '● running' : g.state === 'wait' ? '◌ waiting' : '◎ GC';
+        const stateLabel =
+          g.state === 'run' ? '● running' : g.state === 'wait' ? '◌ waiting' : '◎ GC';
         return (
           <div className="go-row" key={g.id}>
             <span
@@ -59,7 +62,8 @@ export function GoroutinesView() {
         >
           M0 (OS thread) → P0 (processor) → G{runningId} (goroutine)
           <br />
-          goroutine stacks live on the <span style={{ color: 'var(--red)' }}>heap</span>, not OS stack
+          goroutine stacks live on the <span style={{ color: 'var(--red)' }}>heap</span>, not OS
+          stack
           <br />
           goroutine switch: save/restore registers only
           <br />

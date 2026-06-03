@@ -59,7 +59,11 @@ export function buildSnapshot(s: Step, idx: number, total: number): string {
   const flagStr = FLAG_META.map((f) => `${f.k}=${R.flags[f.k]}`).join(' ');
   lines.push(`  RFLAGS   ${R.rflags}  [${flagStr}]`);
   lines.push(`  segment  ${SEG_META.map((sg) => `${sg.k}=${R.seg[sg.k]}`).join(' ')}`);
-  lines.push(`  control  ${Object.entries(R.cr).map(([k, v]) => `${k}=${v}`).join(' ')}`);
+  lines.push(
+    `  control  ${Object.entries(R.cr)
+      .map(([k, v]) => `${k}=${v}`)
+      .join(' ')}`,
+  );
   lines.push(`  XMM0     ${R.simdActive ? R.xmm0 : '0 (inactive this step)'}  ·  MXCSR=0x1F80`);
   lines.push('');
 

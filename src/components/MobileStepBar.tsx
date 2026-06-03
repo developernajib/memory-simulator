@@ -24,7 +24,11 @@ export function MobileStepBar() {
                 strokeLinecap="round"
                 strokeDasharray={C}
                 strokeDashoffset={C * (1 - pct)}
-                style={{ transform: 'rotate(-90deg)', transformOrigin: '50% 50%', transition: 'stroke-dashoffset .3s ease' }}
+                style={{
+                  transform: 'rotate(-90deg)',
+                  transformOrigin: '50% 50%',
+                  transition: 'stroke-dashoffset .3s ease',
+                }}
               />
             </svg>
             <div className="ring-label" style={{ fontSize: 6 }}>

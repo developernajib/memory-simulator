@@ -69,7 +69,11 @@ export function ControlChips({ R }: { R: RegisterFile }) {
   return (
     <div className="reg-chips">
       {Object.entries(R.cr).map(([k, v]) => (
-        <span className="reg-chip tip" data-tip={`${CR_TIPS[k]} · value ${v} · privileged (kernel-only)`} key={k}>
+        <span
+          className="reg-chip tip"
+          data-tip={`${CR_TIPS[k]} · value ${v} · privileged (kernel-only)`}
+          key={k}
+        >
           <b>{k}</b>
           <span className="cv">{v}</span>
         </span>
